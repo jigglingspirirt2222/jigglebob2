@@ -79,25 +79,52 @@
   <div class="container">
     <h2>Create a Post</h2>
     <div class="post-form">
-      <input type="text" placeholder="Your name" />
-      <textarea rows="4" placeholder="What's on your mind?"></textarea>
-      <button>Post</button>
+      <input type="text" id="nameInput" placeholder="Your name" />
+      <textarea id="messageInput" rows="4" placeholder="What's on your mind?"></textarea>
+      <button onclick="submitPost()">Post</button>
     </div>
 
-    <div class="post">
-      <div class="username">BobTheWiggler</div>
-      <p>Welcome to Jigglebob! This is the first post 🎉</p>
-    </div>
-
-    <div class="post">
-      <div class="username">JaneJiggle</div>
-      <p>Love the design of this place. Clean and simple!</p>
+    <div id="postFeed">
+      <!-- Posts will appear here -->
     </div>
   </div>
 
   <footer>
     &copy; 2025 Jigglebob. All rights jiggled.
   </footer>
+
+  <script>
+    function submitPost() {
+      const name = document.getElementById("nameInput").value.trim();
+      const message = document.getElementById("messageInput").value.trim();
+
+      if (name === "" || message === "") {
+        alert("Please fill in both fields.");
+        return;
+      }
+
+      const postFeed = document.getElementById("postFeed");
+
+      const postDiv = document.createElement("div");
+      postDiv.classList.add("post");
+
+      const usernameDiv = document.createElement("div");
+      usernameDiv.classList.add("username");
+      usernameDiv.innerText = name;
+
+      const messageP = document.createElement("p");
+      messageP.innerText = message;
+
+      postDiv.appendChild(usernameDiv);
+      postDiv.appendChild(messageP);
+
+      postFeed.insertBefore(postDiv, postFeed.firstChild);
+
+      // Clear input fields
+      document.getElementById("nameInput").value = "";
+      document.getElementById("messageInput").value = "";
+    }
+  </script>
 
 </body>
 </html>
